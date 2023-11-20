@@ -1,10 +1,10 @@
 variable "AWS_ACCESS_KEY_ID" {
-  type = string
+  type    = string
   default = "AWS_ACCESS_KEY_ID"
 }
 
 variable "AWS_SECRET_ACCESS_KEY" {
-  type = string
+  type    = string
   default = "AWS_SECRET_ACCESS_KEY"
 }
 
@@ -13,15 +13,25 @@ variable "DATABASE_CONNECTION_URL" {
   default = ""
 }
 
+variable "GOOGLE_CLIENT_ID" {
+  type    = string
+  default = "GOOGLE_CLIENT_ID"
+}
+
+variable "GOOGLE_CLIENT_SECRET" {
+  type    = string
+  default = "GOOGLE_CLIENT_SECRET"
+}
+
 variable "app_count" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "aws_region" {
   type        = string
   description = "AWS Region"
-  default     = "us-west-2"
+  default     = "us-east-1"
 }
 
 variable "aws_cloudwatch_retention_in_days" {
@@ -33,7 +43,7 @@ variable "aws_cloudwatch_retention_in_days" {
 variable "app_name" {
   type        = string
   description = "Application Name"
-  default     = "mage-data-prep"
+  default     = "mage-ai"
 }
 
 variable "app_environment" {
@@ -56,6 +66,7 @@ variable "database_user" {
 variable "database_password" {
   type        = string
   description = "The password of the Postgres database."
+  default     = "DATABASE_PASSWORD"
   sensitive   = true
 }
 
@@ -86,5 +97,5 @@ variable "private_subnets" {
 
 variable "availability_zones" {
   description = "List of availability zones"
-  default     = ["us-west-2a", "us-west-2b"]
+  default     = ["us-east-1e", "us-east-1f"]
 }

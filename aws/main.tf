@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  region  = var.aws_region
+  region = var.aws_region
 }
 
 resource "aws_ecs_cluster" "aws-ecs-cluster" {
@@ -40,13 +40,16 @@ data "template_file" "env_vars" {
   template = file("env_vars.json")
 
   vars = {
-    aws_access_key_id = var.AWS_ACCESS_KEY_ID
+    aws_access_key_id     = var.AWS_ACCESS_KEY_ID
     aws_secret_access_key = var.AWS_SECRET_ACCESS_KEY
+    aws_region_name       = var.aws_region
+    google_client_id      = var.GOOGLE_CLIENT_ID
+    google_client_secret  = var.GOOGLE_CLIENT_SECRET
     aws_region_name       = var.aws_region
     # lambda_func_arn = "${aws_lambda_function.terraform_lambda_func.arn}"
     # lambda_func_name = "${aws_lambda_function.terraform_lambda_func.function_name}"
     database_connection_url = "postgresql+psycopg2://${var.database_user}:${var.database_password}@${aws_db_instance.rds.address}:5432/mage"
-    ec2_subnet_id = aws_subnet.public[0].id
+    ec2_subnet_id           = aws_subnet.public[0].id
   }
 }
 
@@ -104,17 +107,17 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
 
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  memory                   = "${var.ecs_task_memory}"
-  cpu                      = "${var.ecs_task_cpu}"
+  memory                   = var.ecs_task_memory
+  cpu                      = var.ecs_task_cpu
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
   task_role_arn            = aws_iam_role.ecsTaskExecutionRole.arn
 
   volume {
-    name  = "${var.app_name}-fs"
+    name = "${var.app_name}-fs"
 
     efs_volume_configuration {
-      file_system_id        = aws_efs_file_system.file_system.id
-      transit_encryption    = "ENABLED"
+      file_system_id     = aws_efs_file_system.file_system.id
+      transit_encryption = "ENABLED"
     }
   }
 
