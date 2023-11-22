@@ -24,8 +24,8 @@
     "value": "${ec2_subnet_id}"
   },
   {
-    "name": "REQUIRE_USER_AUTHENTICATION",
-    "value": "true"
+    "name": "REQUIRE_USER_PERMISSIONS",
+    "value": "1"
   },
   {
     "name": "GOOGLE_CLIENT_ID",
