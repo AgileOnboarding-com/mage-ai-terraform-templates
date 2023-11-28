@@ -82,7 +82,7 @@ variable "ecs_task_cpu" {
 
 variable "ecs_task_memory" {
   description = "ECS task memory"
-  default     = 8192
+  default     = 12288
 }
 
 variable "public_subnets" {
