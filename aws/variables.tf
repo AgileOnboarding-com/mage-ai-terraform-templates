@@ -72,7 +72,7 @@ variable "database_password" {
 
 variable "docker_image" {
   description = "Docker image url used in ECS task."
-  default     = "mageai/mageai:latest"
+  default     = "mageai/mageai:0.9.51"
 }
 
 variable "ecs_task_cpu" {
